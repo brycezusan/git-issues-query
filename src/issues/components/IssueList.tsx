@@ -1,23 +1,32 @@
 import { IssueItem } from "./IssueItem";
 import { Issue } from "../interfaces";
+import { State } from "../interfaces/issue";
 
 interface IssuesListProps {
   issues: Issue[];
+  state?:State,
+  onStateChanged:(newState?:State)=>void
 }
 
-export const IssueList = ({ issues }: IssuesListProps) => {
+export const IssueList = ({ issues  , state , onStateChanged }: IssuesListProps) => {
   return (
     <div className="card border-white">
       <div className="card-header bg-dark">
         <ul className="nav nav-pills card-header-pills">
           <li className="nav-item">
-            <a className="nav-link active">All</a>
+            <a 
+            onClick={()=>onStateChanged()}
+            className={`nav-link ${!state ? 'active':''}`}>All</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link">Open</a>
+            <a 
+              onClick={()=>onStateChanged(State.Open)}
+              className={`nav-link ${state === State.Open? 'active':''}`}>Open</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link">Closed</a>
+            <a 
+              onClick={()=>onStateChanged(State.Closed)}
+              className={`nav-link ${state === State.Closed ? 'active':''}`}>Closed</a>
           </li>
         </ul>
       </div>

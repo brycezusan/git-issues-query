@@ -6,7 +6,7 @@ import { sleep } from "../../utils/sleep";
 const getLabels = async (): Promise<Label[]> => {
   await sleep(2);
 
-  const { data } = await api(`/labels`);
+  const { data } = await api(`/labels?per_page=100`);
   return data;
 };
 
